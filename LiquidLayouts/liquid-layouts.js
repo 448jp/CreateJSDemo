@@ -68,7 +68,7 @@ var WebFontConfig = {
         ]
     },
     active: function () {
-        new LiquidLayouts();
+        new Sound();
     }
 };
 window.onload = function () {
