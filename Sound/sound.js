@@ -1,7 +1,5 @@
 var Sound = (function () {
     function Sound() {
-        this.MOUSE_DOWN = "mousedown";
-        this.MOUSE_UP = "mouseup";
         this.canvas = document.getElementById("my-canvas");
         this.stage = new createjs.Stage("my-canvas");
         this.canvas.width = document.documentElement.clientWidth;
@@ -59,10 +57,10 @@ var Sound = (function () {
             _this.onResize(e);
         }, false);
         this.onResize();
-        this.bg = new createjs.Shape();
-        this.bg.graphics.beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
-        this.stage.addChild(this.bg);
-        this.bg.onClick = function (e) {
+        var bg = new createjs.Shape();
+        bg.graphics.beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
+        this.stage.addChild(bg);
+        bg.onClick = function (e) {
             _this.clickStageHandler(e);
         };
         this.buttonContainer.addChild(this.button);

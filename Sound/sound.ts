@@ -10,14 +10,10 @@
 class Sound {
 	private canvas:HTMLElement;
 	private stage:createjs.Stage;
-	private bg:createjs.Shape;
 	private buttonContainer:createjs.MovieClip;
 	private button:createjs.Bitmap;
 	private isPlaying:bool;
-	private title:createjs.Text;
 	private queue:createjs.LoadQueue;
-	private MOUSE_DOWN:string = "mousedown";
-	private MOUSE_UP:string = "mouseup";
 
 	constructor() {
 		this.canvas = document.getElementById("my-canvas");
@@ -28,8 +24,6 @@ class Sound {
 		createjs.Ticker.addListener(this.stage);
 		if (createjs.Touch.isSupported()) {
 			createjs.Touch.enable(this.stage);
-//			this.MOUSE_DOWN = "touchstart";
-//			this.MOUSE_UP = "touchend";
 		}
 		this.load();
 	}
@@ -66,10 +60,10 @@ class Sound {
 		this.onResize();
 
 		// SE
-		this.bg = new createjs.Shape();
-		this.bg.graphics.beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
-		this.stage.addChild(this.bg);
-		this.bg.onClick = (e) => { this.clickStageHandler(e); };
+		var bg:createjs.Shape = new createjs.Shape();
+		bg.graphics.beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
+		this.stage.addChild(bg);
+		bg.onClick = (e) => { this.clickStageHandler(e); };
 		// BGM
 		this.buttonContainer.addChild(this.button);
 		this.stage.addChild(this.buttonContainer);
