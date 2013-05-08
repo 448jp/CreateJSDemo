@@ -1,9 +1,9 @@
 /**
- * Created with IntelliJ IDEA.
- * User: oki
- * Date: 13/04/23
- * Time: 21:05
- * To change this template use File | Settings | File Templates.
+ * LiquidLayouts
+ * Author: OKI Yoshiya (ceroan)
+ * Date: 2013/04/23 21:05
+ * URL: http://ceroan.jp/
+ * URL: http://448.jp/blog/
  */
 
 class LiquidLayouts {
