@@ -9,6 +9,10 @@ var Sound = (function () {
         if(createjs.Touch.isSupported()) {
             createjs.Touch.enable(this.stage);
         }
+        createjs.Sound.registerPlugins([
+            createjs.HTMLAudioPlugin, 
+            createjs.WebAudioPlugin
+        ]);
         this.load();
     }
     Sound.prototype.load = function () {
@@ -36,7 +40,15 @@ var Sound = (function () {
                 id: "se"
             }, 
             {
-                src: "eurotechno.mp3",
+                src: "se.wav",
+                id: "se"
+            }, 
+            {
+                src: "bgm.mp4",
+                id: "bgm"
+            }, 
+            {
+                src: "bgm.wav",
                 id: "bgm"
             }
         ];
@@ -49,6 +61,8 @@ var Sound = (function () {
         this.button.regX = Math.floor(this.button.image.width * 0.5);
         this.button.regY = Math.floor(this.button.image.height * 0.5);
         this.isPlaying = false;
+        this.bg = new createjs.Shape();
+        this.stage.addChild(this.bg);
         this.init();
     };
     Sound.prototype.init = function () {
@@ -57,10 +71,7 @@ var Sound = (function () {
             _this.onResize(e);
         }, false);
         this.onResize();
-        var bg = new createjs.Shape();
-        bg.graphics.beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
-        this.stage.addChild(bg);
-        bg.onClick = function (e) {
+        this.bg.onClick = function (e) {
             _this.clickStageHandler(e);
         };
         this.buttonContainer.addChild(this.button);
@@ -109,6 +120,7 @@ var Sound = (function () {
         if (typeof e === "undefined") { e = null; }
         this.canvas.width = document.documentElement.clientWidth;
         this.canvas.height = document.documentElement.clientHeight;
+        this.bg.graphics.clear().beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
         this.buttonContainer.x = Math.floor(this.stage.canvas.width * 0.5);
         this.buttonContainer.y = Math.floor(this.stage.canvas.height * 0.5);
         this.stage.update();

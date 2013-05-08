@@ -10,6 +10,7 @@
 class Sound {
 	private canvas:HTMLElement;
 	private stage:createjs.Stage;
+	private bg:createjs.Shape;
 	private buttonContainer:createjs.MovieClip;
 	private button:createjs.Bitmap;
 	private isPlaying:bool;
@@ -25,6 +26,7 @@ class Sound {
 		if (createjs.Touch.isSupported()) {
 			createjs.Touch.enable(this.stage);
 		}
+		createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.WebAudioPlugin]);
 		this.load();
 	}
 
@@ -38,7 +40,9 @@ class Sound {
 			{src: "stop-button_up.png"},
 			{src: "stop-button_down.png"},
 			{src: "se.mp3", id: "se"},
-			{src: "eurotechno.mp3", id: "bgm"}
+			{src: "se.wav", id: "se"},
+			{src: "bgm.mp4", id: "bgm"},
+			{src: "bgm.wav", id: "bgm"}
 		];
 		this.queue.loadManifest(manifest);
 	}
@@ -52,6 +56,10 @@ class Sound {
 
 		this.isPlaying = false;
 
+		// 背景
+		this.bg = new createjs.Shape();
+		this.stage.addChild(this.bg);
+
 		this.init();
 	}
 
@@ -60,10 +68,7 @@ class Sound {
 		this.onResize();
 
 		// SE
-		var bg:createjs.Shape = new createjs.Shape();
-		bg.graphics.beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
-		this.stage.addChild(bg);
-		bg.onClick = (e) => { this.clickStageHandler(e); };
+		this.bg.onClick = (e) => { this.clickStageHandler(e); };
 		// BGM
 		this.buttonContainer.addChild(this.button);
 		this.stage.addChild(this.buttonContainer);
@@ -114,6 +119,8 @@ class Sound {
 		// canvas
 		this.canvas.width = document.documentElement.clientWidth;
 		this.canvas.height = document.documentElement.clientHeight;
+		// 背景
+		this.bg.graphics.clear().beginFill("#FF0000").drawRect(0, 0, this.stage.canvas.width, this.stage.canvas.height).endFill();
 		// ボタン
 		this.buttonContainer.x = Math.floor(this.stage.canvas.width * 0.5);
 		this.buttonContainer.y = Math.floor(this.stage.canvas.height * 0.5);
