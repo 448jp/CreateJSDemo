@@ -68,7 +68,7 @@ var WebFontConfig = {
         ]
     },
     active: function () {
-        new Sound();
+        new LiquidLayouts();
     }
 };
 window.onload = function () {
@@ -83,4 +83,3 @@ document.addEventListener("touchstart", onTouchStart, false);
 function onTouchStart(e) {
     e.preventDefault();
 }
-//@ sourceMappingURL=liquid-layouts.js.map

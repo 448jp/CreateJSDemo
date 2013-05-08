@@ -124,4 +124,3 @@ document.addEventListener("touchmove", onTouchMove, false);
 function onTouchMove(e) {
     e.preventDefault();
 }
-//@ sourceMappingURL=sound.js.map
